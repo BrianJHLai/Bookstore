@@ -1,6 +1,6 @@
 # Notes
 Build a bookstore 
-(More like a records database that also allows one to buy and sell books along with, at most, a few other things)
+(It is now more like a records database that also allows one to buy and sell books along with, at most, a few other things)
 
 -Clock
 -Modify returnal restrictions (Within 30 days of purchase)
