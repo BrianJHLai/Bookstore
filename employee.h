@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include <ctype.h>
-//#include <algorithm>
 using std::string;
 
 #ifndef EMPLOY_H_INCLUDED
@@ -61,7 +60,7 @@ class Employee {
 	}
 };
 
-
+void nonEmptyInput(string& input);
 
 float getFloat();
 

@@ -1,15 +1,15 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <ctype.h>
-#include <iomanip>
-//#include <algorithm>
+#include <ctype.h> //isdigit
+#include <cmath>
+#include <iomanip> //formating
+#include <chrono> //clock
+#include <ctime>  //clock
 using std::string;
 
 #ifndef BOOKS_H_INCLUDED
 #define BOOKS_H_INCLUDED
-
-//If making another cpp file, put function names in here so that main.cpp can call those functions
 
 
 class Book {
@@ -55,22 +55,22 @@ class Supplier;
 
 class Member;
 
-//class Sales;
-
-
+void nonEmptyInput(string& input);
 
 int getInt();
 
 float getFloat();
 
+int getTotalDays(int mon, int date);
+
 void viewBooks(std::vector<Book>& books);
 
-void addBook(std::vector<Book>& books, std::vector<Supplier>& sups, float& loss); //std::vector<Supplier>& sups
+void addBook(std::vector<Book>& books, std::vector<Supplier>& sups, float& loss);
 
-void sellBook(std::vector<Book>& books, std::vector<Member>& mems, float& profit); //std::vector<Sales>& sal
+void sellBook(std::vector<Book>& books, std::vector<Member>& mems, float& profit);
 
 void managePrice(std::vector<Book>& books);
 
-//void bookReturn(std::vector<Member>& mems, std::vector<Book>& books, float& profit);
+void bookReturn(std::vector<Member>& mems, std::vector<Book>& books, float& profit);
 
 #endif

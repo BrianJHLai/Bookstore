@@ -1,14 +1,12 @@
-#include <cmath>
 #include "book.h"
 #include "employee.h"
 #include "supplier.h"
 #include "member.h"
-//#include "sales.h"
+
+static std::vector<int> days {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 //Get a non-empty string from user input
-//Worked previously, but currently broken. Unsure why
-/*
-string nonEmptyInput(string input) {
+void nonEmptyInput(string& input) {
 	std::getline(std::cin, input);
 	std::cout << std::endl;
 
@@ -19,10 +17,7 @@ string nonEmptyInput(string input) {
 			std::cout << std::endl;
 		}
 	}
-
-	return input;
 }
-*/
 
 //Get an integer from user input
 int getInt() {
@@ -96,4 +91,21 @@ float getFloat() {
 			return round(stod(input) * 100.0) / 100.0;
 		}
 	}
+}
+
+//Get the total number of days that have passed so far in a year
+//E.g. Feb 15 = 31 + 15 = 46 total days
+int getTotalDays(int mon, int date) {
+	int total_days = 0;
+
+	for (int i = 1; i < 13; i++) {
+		if (mon < i + 1) {
+			break;
+		}
+		total_days += days[i];
+	}
+
+	total_days += date;
+
+	return total_days;
 }

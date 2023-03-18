@@ -1,9 +1,7 @@
 #include "book.h"
 #include "supplier.h"
 #include "member.h"
-//#include <algorithm> //std::find
 
-//Round doubles to 2 decimals
 
 //Prints out a list of every book's title, price, and stock
 void viewBooks(std::vector<Book>& books) {
@@ -31,31 +29,13 @@ void addBook(std::vector<Book>& books, std::vector<Supplier>& sups, float& loss)
 				
 	std::cout << "Please input the title of the book that you wish to add: ";
 	string title;
-	std::getline(std::cin, title);
-	std::cout << std::endl;
-
-	if (title.empty()) {
-		while (title.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, title);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(title);
 
 	//Supplier who sells the book //Must exist in supplier db
 	std::cout << "Please input the name of the supplier whose list of books supplied "
 	<< "that you wish to view: ";
 	string supplier;
-	std::getline(std::cin, supplier);
-	std::cout << std::endl;
-
-	if (supplier.empty()) {
-		while (supplier.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, supplier);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(supplier);
 
 	//Find the supplier
 	int sup_location = -1;
@@ -122,16 +102,7 @@ void sellBook(std::vector<Book>& books, std::vector<Member>& mems, float& profit
 				
 	std::cout << "Please input the title of the book that you wish to sell: ";
 	string title;
-	std::getline(std::cin, title);
-	std::cout << std::endl;
-
-	if (title.empty()) {
-		while (title.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, title);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(title);
 
 	std::cout << "Please input how many of the book that you wish to sell: ";
 	int stock = getInt();
@@ -150,21 +121,16 @@ void sellBook(std::vector<Book>& books, std::vector<Member>& mems, float& profit
 		//Check if the customer is a member
 		std::cout << "Please input the name of the customer, in case they are a member: ";
 		string customer;
-		std::getline(std::cin, customer);
-		std::cout << std::endl;
-
-		if (customer.empty()) {
-			while (customer.empty()) {
-				std::cout << "Please give a non-empty input: "; //
-				std::getline(std::cin, customer);
-				std::cout << std::endl;
-			}
-		}
+		nonEmptyInput(customer);
 
 		//Looking for the customer's name in the member database
 		for (int i = 0; i < mems.size(); i++) {
 			if (mems[i].getName() == customer) {
-				mems[i].memBuyBook(title);
+				std::time_t today = time(0);
+				tm *ltm = localtime(&today);
+				int td = getTotalDays(1 + ltm->tm_mon, ltm->tm_mday);
+				
+				mems[i].memBuyBook(title, stock, books[location].getPrice(), 1900 + ltm->tm_year, td);
 				std::cout << "The customer was a member." << std::endl;
 				std::cout << "The book they just bought has been added to their book list.\n" << std::endl; //
 				break;
@@ -209,16 +175,7 @@ void managePrice(std::vector<Book>& books) {
 				
 	std::cout << "Please input the title of the book that you wish to modify the price for: ";
 	string title;
-	std::getline(std::cin, title);
-	std::cout << std::endl;
-
-	if (title.empty()) {
-		while (title.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, title);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(title);
 
 	//Finding the specific book
 	int location = -1;
@@ -242,16 +199,18 @@ void managePrice(std::vector<Book>& books) {
 		std::cout << title << " is not stocked by the store!\n" << std::endl;
 	}
 }
-/*
-//Recieve a returned book from a member
+
+//Recieve a returned book from a member (Purchase must be within 30 days from current date)
 void bookReturn(std::vector<Member>& mems, std::vector<Book>& books, float& profit) {
-	if (mems.size() == 0) {
-		std::cout << "The bookstore currently does not have any members.\n" << std::endl;
+	if (books.size() == 0 || mems.size() == 0) {
+		std::cout << "The bookstore must have at least 1 title stocked and at least 1 member "
+		<< "before it can accept a returned book from a member.\n" << std::endl; //
 		return;
 	}
 
 	std::cout << "Please input the name of the member who wished to return a book: ";
-	string name = nonEmptyInput(name);
+	string name;
+	nonEmptyInput(name);
 
 	//Find the member
 	int location = -1;
@@ -269,7 +228,8 @@ void bookReturn(std::vector<Member>& mems, std::vector<Book>& books, float& prof
 	}
 
 	std::cout << "Please input the title of the book that the member wishes to return: ";
-	string title = nonEmptyInput(title);
+	string title;
+	nonEmptyInput(title);
 
 	//Check if the bookstore stocks the given title
 	int book_location = -1;
@@ -280,19 +240,34 @@ void bookReturn(std::vector<Member>& mems, std::vector<Book>& books, float& prof
 		}
 	}
 
+	//Get the year and total_days
+	std::time_t today = time(0);
+	tm *ltm = localtime(&today);
+	int td = getTotalDays(1 + ltm->tm_mon, ltm->tm_mday);
+
+	//Member bought the book from the bookstore
 	if (mems[location].didBuyBook(title) && book_location != -1) {
-		std::cout << "Please input the number of copies of the book that the member wishes to return: ";
-		int copies = getInt();
+		//Purchase of the book(s) was within the last 30 days
+		if (mems[location].withinThirtyDays(title, 1900 + ltm->tm_year, td)) {
+			std::cout << "Please input the number of copies of the book that the member wishes " 
+			<< "to return (from their most recent purchase of the book): ";
+			int copies = getInt();
 
-		mems[location].returnBook(title, copies);
+			std::pair<int,float> p = mems[location].returnBook(title, copies);
 
-		profit -= copies * books[book_location].getPrice();
+			profit -= p.second;
+			books[book_location].changeStock(p.first);
 
-		if (copies == 1) {
-			std::cout << "The member has returned a copy of " << title << ".\n"<< std::endl;
+			if (copies == 1) {
+				std::cout << "The member has returned a copy of " << title << ".\n"<< std::endl;
+			}
+			else {
+				std::cout << "The member has returned " << p.first << " copies of " << title << ".\n"<< std::endl;
+			}
 		}
 		else {
-			std::cout << "The member has returned " << copies << " copies of " << title << ".\n"<< std::endl;
+			std::cout << name << "'s last purchase of " << title << " was over 30 days ago, and therefore "
+			<< "is non-refundable.\n" << std::endl;
 		}
 	}
 	else {
@@ -301,18 +276,3 @@ void bookReturn(std::vector<Member>& mems, std::vector<Book>& books, float& prof
 	}
 
 }
-*/
-
-//Reference for previous version of returnBook
-/*
-	//Check if the member bought the book from the bookstore
-	if (mems[location].didBuyBook(title)) {
-		mems[location].returnBook(title);
-		std::cout << "The member has returned a copy of " << title << ".\n"<< std::endl;
-	}
-	else {
-		std::cout << "The member cannot return a book that is not in their possession, nor can "
-		<< "they return a book that was not bought from this bookstore!\n" << std::endl;
-	}
-*/
-//sellBook

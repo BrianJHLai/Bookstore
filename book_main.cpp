@@ -2,7 +2,6 @@
 #include "employee.h"
 #include "supplier.h"
 #include "member.h"
-//#include "sales.h"
 #include <stdlib.h>
 
 
@@ -16,11 +15,8 @@ void manage_store(std::vector<Book>& books, std::vector<Supplier>& sups, std::ve
 		std::cout << "2. Buy books from supplier" << std::endl;
 		std::cout << "3. Sell books to customers" << std::endl;
 		std::cout << "4. Manage book prices" << std::endl;
-		//std::cout << "5. Receive a returned book" << std::endl;
+		std::cout << "5. Receive a returned book" << std::endl;
 		std::cout << "6. Return to main menu" << std::endl;
-		//std::cout << "NOTE: Books may not be returned if any purchase is made after!" << std::endl;
-		//std::cout << "Additionally, only members may return books, and only for those that they "
-		//<< "have bought as a member." << std::endl;
 		std::cout << "Please select an option: ";
 		std::getline(std::cin, option);
 		std::cout << std::endl;
@@ -44,9 +40,9 @@ void manage_store(std::vector<Book>& books, std::vector<Supplier>& sups, std::ve
 			case 4:
 				managePrice(books);
 				break;
-			//case 5:
-				//bookReturn(mems, books, profit);
-				//break;
+			case 5:
+				bookReturn(mems, books, profit);
+				break;
 			case 6:
 				return;
 			default:
@@ -146,7 +142,7 @@ void member_db(std::vector<Member>& mems) {
 	while (true) {
 		std::cout << "1. View member records" << std::endl;
 		std::cout << "2. View list of books bought by a member" << std::endl;
-		//std::cout << "3. View member records" << std::endl;
+		std::cout << "3. View list of books returned by a member" << std::endl;
 		std::cout << "4. Add member record" << std::endl;
 		std::cout << "5. Remove member record" << std::endl;
 		std::cout << "6. Modify member record" << std::endl;
@@ -167,9 +163,9 @@ void member_db(std::vector<Member>& mems) {
 			case 2:
 				viewBooksBought(mems);
 				break;
-			//case 3:
-				//viewBooksReturned(mems);
-				//break;
+			case 3:
+				viewBooksReturned(mems);
+				break;
 			case 4:
 				addMember(mems);
 				break;
@@ -195,20 +191,15 @@ void sales_records(float& profit, float& loss) {
 	string option;
 
 	while (true) {
-		//std::cout << "1. See records for books sold" << std::endl;
-		//std::cout << "2. See records for profit made" << std::endl;
-		//std::cout << "3. See records for losses made" << std::endl;
 		std::cout << "1. See total profits" << std::endl;
 		std::cout << "2. See total losses" << std::endl;
-		std::cout << "3. See total books sold" << std::endl;
-		std::cout << "4. See total books bought" << std::endl;
-		std::cout << "5. Return to main menu" << std::endl;
+		std::cout << "3. Return to main menu" << std::endl;
 		std::cout << "Please select an option: ";
 		std::getline(std::cin, option);
 		std::cout << std::endl;
 
 		if (option.length() > 1 || !isdigit(option[0])) {
-			std::cout << "Please type a number from 1 to 5.\n" << std::endl;
+			std::cout << "Please type a number from 1 to 3.\n" << std::endl;
 			continue;
 		}
 
@@ -222,15 +213,9 @@ void sales_records(float& profit, float& loss) {
 				<< loss << "\n" << std::endl;
 				break;
 			case 3:
-				;
-				break;
-			case 4:
-				;
-				break;
-			case 5:
 				return;
 			default:
-				std::cout << "Invalid option. Please type a number from 1 to 5.\n" << std::endl;
+				std::cout << "Invalid option. Please type a number from 1 to 3.\n" << std::endl;
 				break;
 		}
 	}
@@ -241,6 +226,11 @@ void main_menu(std::vector<Book>& books, std::vector<Employee>& emps, std::vecto
 	string option;
 
 	while (true) {
+		//Clock
+		auto time = std::chrono::system_clock::now();
+		std::time_t date = std::chrono::system_clock::to_time_t(time);
+		std::cout << "Right now, it is " << std::ctime(&date) << std::endl;
+
 		std::cout << "1. Manage the bookstore" << std::endl;
 		std::cout << "2. Employee Database" << std::endl;
 		std::cout << "3. Supplier Database" << std::endl;
@@ -273,7 +263,7 @@ void main_menu(std::vector<Book>& books, std::vector<Employee>& emps, std::vecto
 				sales_records(profit, loss);
 				break;
 			case 6:
-				return; //exit();
+				return;
 			default:
 				std::cout << "Invalid option. Please type a number from 1 to 6.\n" << std::endl;
 				break;
@@ -291,9 +281,6 @@ int main(int argc, char const *argv[])
 	std::vector<Employee> employee_list;
 	std::vector<Supplier> supplier_list;
 	std::vector<Member> member_list;
-	//std::vector<Sales> sales_list;
-	//int books_bought = 0;
-	//int books_sokd;= 0;
 	float profit = 0; 
 	float loss = 0;
 
