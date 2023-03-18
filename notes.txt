@@ -1,0 +1,101 @@
+Build a bookstore 
+(More like a records database that also allows one to buy and sell books along with, at most, a few other things)
+
+-Clock*
+-Modify returnal restrictions (Within 30 days of purchase)*
+-Fix helper function nonEmptyInput*
+-Buy/Sell multiple titles within single call of buyBooks/sellBooks (while input == "yes")?
+-Phone Number?
+
+-Manage the bookstore (book.h)
+	-View list of stocked books
+		-Title
+		-Stock
+		-Price
+	-Add stock
+	  	-Title
+		-Supplier (Modify a supplier's record of books supplied) (Supplier must be in db)
+		-Cost (of a copy)
+		-Stock (U# of copies buying)
+		-Stocked before
+			-Check if supplier is different from previous supplier
+			-(Restock)
+		-First time stocking
+			-Price (for a copy)
+			-New Book
+			-New addition to supplier's list of books supplied
+		-Loss
+	-Sell stock
+		-Title
+		-Sell how many
+		-Check if customer is a member (Add to their list of books bought if so)
+		-If not enough stock
+			-Sell what remains, and nothing more
+		-If enough stock
+			-Sell requested amount
+		-Profit
+	-Modify prices
+	-Recieve returned book
+		-Title
+		-How many (Return to bookstore's title's current stock)
+		-Reduce profit by amount returned times title's current price (Odd if price rose btwn buying and returning)
+
+		-Accept from only members (Member objects have list of books bought, but not all customers are Members)
+		-Cannot return books bought as customer before becoming Member
+		-As a Member, cannot return books bought as a Member followed by becoming a non-Member, then a Member again
+			-A Mmeber's record would be deleted if they became a non-Member
+-Employees:
+	-View list of Employees
+		-Name
+		-Address
+		-Job
+		-Salary
+	-Add employee record
+		-Name
+		-Address
+		-Job
+		-Salary
+	-Remove employee record
+	-Modify employee record
+		-Name
+		-Address
+		-Job
+		-Salary
+-Suppliers:
+	-View list of suppliers
+		-Name
+		-Location
+	-View list of books supplied by a supplier
+	-Add supplier record
+		-Name
+		-Location
+	-Remove supplier record
+	-Modify supplier record
+		-Name
+		-Location
+-Member:
+	-View list of Members
+		-Name
+		-Address
+	-View list of books bought by a Member
+	-View list of books returned by a Member
+	-Add Member record
+		-Name
+		-Address
+	-Remove Member record
+	-Modify Member record
+		-Name
+		-Address
+-Sales: (Would rely on a clock except for Total)
+	-Profit
+		-Total: Selling books
+		-Daily, Weekly, Monthly, Yearly (Not implemented)
+	-Losses
+		-Total: Buying books, salaries, utilities?, taxes?
+		-Daily, Weekly, Monthly, Yearly (Not implemented)
+	-Books sold (Not implemented)
+		-Total
+		-Daily, Weekly, Monthly, Yearly
+	-Books bought (Not implemented)
+		-Total
+		-Daily, Weekly, Monthly, Yearly
