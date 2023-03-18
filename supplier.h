@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include <ctype.h>
-//#include <algorithm>
 using std::string;
 
 #ifndef SUP_H_INCLUDED
@@ -65,7 +64,7 @@ class Supplier {
 	}
 };
 
-
+void nonEmptyInput(string& input);
 
 void viewSuppliers(std::vector<Supplier>& sups);
 

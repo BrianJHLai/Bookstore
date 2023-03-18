@@ -1,7 +1,5 @@
 #include "employee.h"
 
-//Round doubles to 2 decimals
-//Guards for name, address, and position? (No numbers?; ?; Actual positions?)
 
 //Prints out a list of every employee's name, address, position, and salary
 void viewEmployees(std::vector<Employee>& emps) {
@@ -22,16 +20,7 @@ void viewEmployees(std::vector<Employee>& emps) {
 void addEmployee(std::vector<Employee>& emps) {
 	std::cout << "Please input the name of the employee that you wish to add a record for: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(name);
 
 	//Make sure the inputted name isn't that of an existing employee
 	for (int i = 0; i < emps.size(); i++) {
@@ -43,29 +32,11 @@ void addEmployee(std::vector<Employee>& emps) {
 
 	std::cout << "Please input the address of the employee that you wish to add: ";
 	string address;
-	std::getline(std::cin, address);
-	std::cout << std::endl;
-
-	if (address.empty()) {
-		while (address.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, address);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(address);
 
 	std::cout << "Please input the position of the employee that you wish to add: ";
 	string position;
-	std::getline(std::cin, position);
-	std::cout << std::endl;
-
-	if (position.empty()) {
-		while (position.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, position);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(position);
 
 	std::cout << "Please input the salary of the employee that you wish to add: ";
 	float salary = getFloat();
@@ -86,17 +57,7 @@ void removeEmployee(std::vector<Employee>& emps) {
 
 	std::cout << "Please input the name of the employee that you wish to remove: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
-
+	nonEmptyInput(name);
 
 	//Find the employee, and remove them from the database
 	for (int i = 0; i < emps.size(); i++) {
@@ -115,16 +76,7 @@ void removeEmployee(std::vector<Employee>& emps) {
 void modifyName(Employee& emp) {
 	std::cout << "Please input the employee's new name: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(name);
 
 	string old_name = emp.getName();
 
@@ -137,16 +89,7 @@ void modifyName(Employee& emp) {
 void modifyAddress(Employee& emp) {
 	std::cout << "Please input the employee's new address: ";
 	string address;
-	std::getline(std::cin, address);
-	std::cout << std::endl;
-
-	if (address.empty()) {
-		while (address.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, address);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(address);
 
 	emp.changeAddress(address);
 
@@ -157,16 +100,7 @@ void modifyAddress(Employee& emp) {
 void modifyPosition(Employee& emp) {
 	std::cout << "Please input the employee's new position: ";
 	string position;
-	std::getline(std::cin, position);
-	std::cout << std::endl;
-
-	if (position.empty()) {
-		while (position.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, position);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(position);
 
 	emp.changePosition(position);
 
@@ -194,16 +128,7 @@ void modifyEmployee(std::vector<Employee>& emps) {
 
 	std::cout << "Please input the name of the employee whose record you wish to modify: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(name);
 
 	//Make sure the inputted name is that of an existing employee
 	int location = -1;

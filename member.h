@@ -2,24 +2,29 @@
 #include <iostream>
 #include <vector>
 #include <ctype.h>
+#include <cmath>
 #include <unordered_map>
-//#include <algorithm>
+#include <utility>
+#include <algorithm>
 using std::string;
 
 #ifndef MEM_H_INCLUDED
 #define MEM_H_INCLUDED
 
+struct Purchase {
+	int copies;
+	float price;
+	int year;
+	int total_days; //The number of days into a year E.g. Feb 15 = 46
+};
+
 class Member {
-  private:
+ 	private:
   	//Attributes
 	string name;
 	string address;
-	std::vector<string> books_bought; 
-	//unordered_map<string, std::vector<pair<int, float>>> books_bought;
-	//unordered_map<string, pair<int, float>> books_bought;
-		//Unordered map key: title, value: <stock, total price>; Returns accepted if no other purchase made after
-		//If same book purchased, erase previous key-value pair and add new one
-	//std::vector<string> books_returned;
+	std::unordered_map<string, std::vector<Purchase>> books_bought;
+	std::vector<string> books_returned;
 
   public:
   	//Constructor
@@ -37,30 +42,50 @@ class Member {
 		address = a;
 	}
 
-	void memBuyBook(string t) {
-		books_bought.push_back(t);
-	}
-/*
-	void returnBook(string t, int c) {
-		
-		//for (int i = 0; i < books_bought.size(); i++) {
-			//if (books_bought[i] == t) {
-				//books_bought.erase(books_bought.begin() + i);
-				//break;
-			//}
-		//}
-		
+	void memBuyBook(string t, int c, float p, int yr, int td) {
 
-		if (c >= books_bought[t].first) {
-			; //delete last one, but how to handle now last element?
+		struct Purchase pur = {c, p, yr, td};
+
+		if (books_bought.find(t) != books_bought.end()) {
+			books_bought.find(t)->second.push_back(pur);
 		}
 		else {
-			books_bought[t].first -= c;
+			std::vector<Purchase> v {pur};
+			books_bought[t] = v;
+		}
+	}
+
+	std::pair<int,float> returnBook(string t, int c) { //
+
+		int stock = 0;
+		float money = 0;
+
+		if (c >= books_bought[t].back().copies) {
+			stock = books_bought[t].back().copies;
+			money = books_bought[t].back().copies * books_bought[t].back().price;
+			books_bought[t].pop_back();
+			if (books_bought[t].empty()) {
+				books_bought.erase(t);
+			}
+		}
+		else {
+			stock = c;
+			money = c * books_bought[t].back().price;
+			books_bought[t].back().copies -= c;
 		}
 
-		books_returned.push_back(t);
+		std::vector<string>::iterator it;
+		it = find(books_returned.begin(), books_returned.end(), t);
+
+		if (it == books_returned.end()) {
+			books_returned.push_back(t);
+		}
+
+		std::pair<int,float> p (stock, money);
+		
+		return p;
 	}
-*/
+
 	//Getters
 	string getName() {
 		return name;
@@ -73,23 +98,18 @@ class Member {
 	int getBoughtNum() {
 		return books_bought.size();
 	}
-/*
+
 	int getReturnedNum() {
 		return books_returned.size();
 	}
-*/
+
 	void getBooksBought() {
-		
-		for (int i = 0; i < books_bought.size(); i++) {
-			std::cout << books_bought[i] << std::endl;
-		}
-		
-		//for (auto i: books_bought) 
-			//std::cout << x.first << std::endl;
+		for (auto i: books_bought) 
+			std::cout << i.first << std::endl;
 
 		std::cout << std::endl;
 	}
-/*
+
 	void getBooksReturned() {
 		for (int i = 0; i < books_returned.size(); i++) {
 			std::cout << books_returned[i] << std::endl;
@@ -97,14 +117,21 @@ class Member {
 
 		std::cout << std::endl;
 	}
-*/
+
 	//Other
 	bool didBuyBook(string t) {
-		//if (books_bought.find(t) == books_bought.end() - 1) {
-			//return true;
-		//}
-		for (int i = 0; i < books_bought.size(); i++) {
-			if (books_bought[i] == t) {
+		if (books_bought.find(t) != books_bought.end()) {
+			return true;
+		}
+
+		return false;
+	}
+
+	bool withinThirtyDays(string t, int yr, int td) {
+		if (didBuyBook(t)) {
+			int yr_diff = yr - books_bought[t].back().year;
+			int td_diff = td - books_bought[t].back().total_days;
+			if (abs(yr_diff * 365 - td_diff) <= 30) {
 				return true;
 			}
 		}
@@ -113,13 +140,13 @@ class Member {
 	}
 };
 
-
+void nonEmptyInput(string& input);
 
 void viewMembers(std::vector<Member>& mems);
 
 void viewBooksBought(std::vector<Member>& mems);
 
-//void viewBooksReturned(std::vector<Member>& mems);
+void viewBooksReturned(std::vector<Member>& mems);
 
 void addMember(std::vector<Member>& mems);
 

@@ -1,5 +1,6 @@
 #include "member.h"
 
+
 //View list of members
 void viewMembers(std::vector<Member>& mems) {
 	if (mems.size() == 0) {
@@ -25,16 +26,7 @@ void viewBooksBought(std::vector<Member>& mems) {
 	std::cout << "PLease input the name of the member whose list of books bought "
 	<< "that you wish to view: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(name);
 
 	//Find the member
 	int location = -1;
@@ -47,20 +39,19 @@ void viewBooksBought(std::vector<Member>& mems) {
 
 	if (location != -1) {
 		if (mems[location].getBoughtNum() == 0) {
-			std::cout << name << " has yet to buy any books from the bookstore.\n" << std::endl;
+			std::cout << name << " does not have any books that they have bought " 
+			<< "from the bookstore.\n" << std::endl;
 			return;
 		}
 
 		mems[location].getBooksBought();
-
-		std::cout << std::endl;
 	}
 	else {
 		std::cout << "The bookstore has no records of a member by the name of " << name
 		<< "!\n" << std::endl;
 	}
 }
-/*
+
 //View a list of books returned by a member
 void viewBooksReturned(std::vector<Member>& mems) {
 	if (mems.size() == 0) {
@@ -70,7 +61,8 @@ void viewBooksReturned(std::vector<Member>& mems) {
 
 	;std::cout << "PLease input the name of the member whose list of books returned "
 	<< "that you wish to view: ";
-	string name = nonEmptyInput(name);
+	string name;
+	nonEmptyInput(name);
 
 	//Find the member
 	int location = -1;
@@ -88,29 +80,18 @@ void viewBooksReturned(std::vector<Member>& mems) {
 		}
 
 		mems[location].getBooksReturned();
-
-		std::cout << std::endl;
 	}
 	else {
 		std::cout << "The bookstore has no records of a member by the name of " << name
 		<< "!\n" << std::endl;
 	}
 }
-*/
+
 //Add a new member record
 void addMember(std::vector<Member>& mems) {
 	std::cout << "Please input the name of the member you wish to add: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(name);
 
 	//Check if there is already a record of the member
 	for (int i = 0; i < mems.size(); i++) {
@@ -122,16 +103,7 @@ void addMember(std::vector<Member>& mems) {
 
 	std::cout << "Please input the address of the member that you wish to add: ";
 	string address;
-	std::getline(std::cin, address);
-	std::cout << std::endl;
-
-	if (address.empty()) {
-		while (address.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, address);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(address);
 
 	Member m(name, address);
 
@@ -149,16 +121,7 @@ void removeMember(std::vector<Member>& mems) {
 
 	std::cout << "Please input the name of the member you wish to remove: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(name);
 
 	//Find the record of the member, and remove them
 	for (int i = 0; i < mems.size(); i++) {
@@ -178,16 +141,7 @@ void removeMember(std::vector<Member>& mems) {
 void modifyName(Member& mem) {
 	std::cout << "Please input the member's new name: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(name);
 
 	string old_name = mem.getName();
 
@@ -198,18 +152,9 @@ void modifyName(Member& mem) {
 
 //Modify a member's address
 void modifyAddress(Member& mem) {
-	std::cout << "Please input the member's new address': ";
+	std::cout << "Please input the member's new address: ";
 	string address;
-	std::getline(std::cin, address);
-	std::cout << std::endl;
-
-	if (address.empty()) {
-		while (address.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, address);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(address);
 
 	mem.changeAddress(address);
 
@@ -227,16 +172,7 @@ void modifyMember(std::vector<Member>& mems) {
 
 	std::cout << "Please input the name of the member whose record you wish to modify: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(name);
 
 	//Find the member
 	int location = -1;

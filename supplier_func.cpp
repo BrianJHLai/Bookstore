@@ -1,6 +1,5 @@
 #include "supplier.h"
 
-//
 
 //View all supplier records
 void viewSuppliers(std::vector<Supplier>& sups) {
@@ -27,16 +26,7 @@ void viewSupplierBooks(std::vector<Supplier>& sups) { //Name
 	std::cout << "Please input the name of the supplier whose list of books supplied "
 	<< "that you wish to view: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(name);
 
 	//Find the supplier
 	int location = -1;
@@ -68,16 +58,7 @@ void viewSupplierBooks(std::vector<Supplier>& sups) { //Name
 void addSupplier(std::vector<Supplier>& sups) {
 	std::cout << "Please input the name of the supplier you wish to add: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(name);
 
 	//Check if there is already a record of the supplier
 	for (int i = 0; i < sups.size(); i++) {
@@ -89,16 +70,7 @@ void addSupplier(std::vector<Supplier>& sups) {
 
 	std::cout << "Please input the address of the supplier that you wish to add: ";
 	string address;
-	std::getline(std::cin, address);
-	std::cout << std::endl;
-
-	if (address.empty()) {
-		while (address.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, address);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(address);
 
 	Supplier s(name, address);
 
@@ -116,16 +88,7 @@ void removeSupplier(std::vector<Supplier>& sups) {
 
 	std::cout << "Please input the name of the supplier you wish to remove: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(name);
 
 	//Find the record of the supplier, and remove it
 	for (int i = 0; i < sups.size(); i++) {
@@ -145,16 +108,7 @@ void removeSupplier(std::vector<Supplier>& sups) {
 void modifyName(Supplier& sup) {
 	std::cout << "Please input the supplier's new name: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(name);
 
 	string old_name = sup.getName();
 
@@ -167,16 +121,7 @@ void modifyName(Supplier& sup) {
 void modifyAddress(Supplier& sup) {
 	std::cout << "Please input the supplier's new address': ";
 	string address;
-	std::getline(std::cin, address);
-	std::cout << std::endl;
-
-	if (address.empty()) {
-		while (address.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, address);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(address);
 
 	sup.changeAddress(address);
 
@@ -194,16 +139,7 @@ void modifySupplier(std::vector<Supplier>& sups) {
 
 	std::cout << "Please input the name of the supplier whose record you wish to modify: ";
 	string name;
-	std::getline(std::cin, name);
-	std::cout << std::endl;
-
-	if (name.empty()) {
-		while (name.empty()) {
-			std::cout << "Please give a non-empty input: "; //
-			std::getline(std::cin, name);
-			std::cout << std::endl;
-		}
-	}
+	nonEmptyInput(name);
 
 	//Find the supplier
 	int location = -1;
