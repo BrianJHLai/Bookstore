@@ -1,100 +1,67 @@
 # Notes
-Build a bookstore 
-(It is now more like a records database that also allows one to buy and sell books along with, at most, a few other things)
+Individual independent project written in C++ on Sublime Text, attempting to simulate a bookstore's database of book wares, employees, suppliers, members, and sales
 
--Clock
--Modify returnal restrictions (Within 30 days of purchase)
--Buy/Sell multiple titles within single call of buyBooks/sellBooks (while input == "yes")?
+Book Attributes
+1. title - The name of the book
+2. price - How much for 1 copy of the book the bookstore is selling for
+3. stock - How many copies of the book that bookstore currently has in its wares
 
--Manage the bookstore (book.h)
-	-View list of stocked books
-		-Title
-		-Stock
-		-Price
-	-Add stock
-	  	-Title
-		-Supplier (Modify a supplier's record of books supplied) (Supplier must be in db)
-		-Cost (of a copy)
-		-Stock (U# of copies buying)
-		-Stocked before
-			-Check if supplier is different from previous supplier
-			-(Restock)
-		-First time stocking
-			-Price (for a copy)
-			-New Book
-			-New addition to supplier's list of books supplied
-		-Loss
-	-Sell stock
-		-Title
-		-Sell how many
-		-Check if customer is a member (Add to their list of books bought if so)
-		-If not enough stock
-			-Sell what remains, and nothing more
-		-If enough stock
-			-Sell requested amount
-		-Profit
-	-Modify prices
-	-Recieve returned book (Not implemented)
-		-Title
-		-How many (Return to bookstore's title's current stock)
-		-Reduce profit by amount returned times title's current price (Odd if price rose btwn buying and returning)
+Employee Attributes
+1. name - The name of the employee
+2. address - The address of the employee
+3. position - The job that the employee is working at the bookstore
+4. salary - How much money the employee is being paid for their work
 
-		-Accept from only members (Member objects have list of books bought, but not all customers are Members)
-		-Cannot return books bought as customer before becoming Member
-		-As a Member, cannot return books bought as a Member followed by becoming a non-Member, then a Member again
-			-A Mmeber's record would be deleted if they became a non-Member
--Employees:
-	-View list of Employees
-		-Name
-		-Address
-		-Job
-		-Salary
-	-Add employee record
-		-Name
-		-Address
-		-Job
-		-Salary
-	-Remove employee record
-	-Modify employee record
-		-Name
-		-Address
-		-Job
-		-Salary
--Suppliers:
-	-View list of suppliers
-		-Name
-		-Location
-	-View list of books supplied by a supplier
-	-Add supplier record
-		-Name
-		-Location
-	-Remove supplier record
-	-Modify supplier record
-		-Name
-		-Location
--Member:
-	-View list of Members
-		-Name
-		-Address
-	-View list of books bought by a Member
-	-View list of books returned by a Member (Not implemented/Commented out)
-	-Add Member record
-		-Name
-		-Address
-	-Remove Member record
-	-Modify Member record
-		-Name
-		-Address
--Sales: (Would rely on a clock except for Total)
-	-Profit
-		-Total: Selling books
-		-Daily, Weekly, Monthly, Yearly (Not implemented)
-	-Losses
-		-Total: Buying books, salaries, utilities?, taxes?
-		-Daily, Weekly, Monthly, Yearly (Not implemented)
-	-Books sold (Not implemented)
-		-Total
-		-Daily, Weekly, Monthly, Yearly
-	-Books bought (Not implemented)
-		-Total
-		-Daily, Weekly, Monthly, Yearly
+Supplier Attributes
+1. name - The name of the supplier
+2. address - The address of the supplier
+3. books - The list of books that the supplier has sold copies to the bookstore
+
+Member Attributes
+1. name - The name of the member
+2. address - The address of the member
+3. books_bought - The list of books that the member has bought from the bookstore; each book string is associated with a Purchase struct of 4 attributes
+	3a. copies - How many copies of the book the member bought
+	3b. price - The price for 1 copy at the time of the purchase
+	3c. year - The year that the purchase was made
+	3d. total_days - How many days into the year when the purchase was made. E.g. Jan 1st = 1, Jan 2nd = 2, Feb 1st = 32
+4. books_returned - The list of books that the member has returned
+
+Main Menu Options
+1. Manage the bookstore - 
+2. Employee Database - 
+3. Supplier Database - 
+4. Member Database - 
+5. Sales Records - 
+
+Manage the Bookstore Options
+1. View book list - 
+2. Buy books from supplier - 
+3. Sell books to customers - 
+4. Manage book prices - 
+5. Receive a returned book - 
+
+Employee DB Options
+1. View employee records - 
+2. Add employee record - 
+3. Remove employee record - 
+4. Modify employee record - 
+
+Supplier DB Options
+1. View supplier records - 
+2. View a supplier's list of books supplied - 
+3. Add supplier record - 
+4. Remove supplier record - 
+5. Modify supplier record - 
+
+Member DB Options
+1. View member records - 
+2. View list of books bought by a member - 
+3. View list of books returned by a member - 
+4. Add member record - 
+5. Remove member record - 
+6. Modify member record - 
+
+Sales Records Options
+1. See total profits - 
+2. See total losses - 
