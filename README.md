@@ -71,7 +71,8 @@ Employee DB Options
  	-The user is asked the name of the employee whose record is being deleted
 	-If the bookstore has no employee record of the inputted name, the user is informed of the fact and redirected to the "Employee Database" menu
 4. Modify employee record - Allows the user to change an Employee's attributes
- 	-
+ 	-If the bookstore has no employee records, the user is informed of the fact and redirected to the "Employee Database" menu
+	-The user is then asked which of the attributes listed above they wish to change, and then to input the attribute's new value
 
 Supplier DB Options
 1. View supplier records - Displays every supplier's name and address
@@ -86,7 +87,8 @@ Supplier DB Options
  	-The user is asked the name of the supplier whose record is being deleted
 	-If the bookstore has no supplier records of the inputted name, the user is informed of the fact and redirected to the "Supplier Database" menu
 5. Modify supplier record - Allows a user to change a Supplier's name and addrees
- 	-
+ 	-If the bookstore has no supplier records, the user is informed of the fact and redirected to the "Supplier Database" menu
+	-The user is then asked which of the attributes listed above they wish to change, and then to input the attribute's new value
 
 Member DB Options
 1. View member records - Displays every member's name and address
@@ -104,7 +106,8 @@ Member DB Options
  	-The user is asked the name of the member whose record is being deleted
 	-If the bookstore has no member records of the inputted name, the user is informed of the fact and redirected to the "Member Database" menu
 6. Modify member record - Allows a user to change a Member's name and address
- 	-
+ 	-If the bookstore has no member records, the user is informed of the fact and redirected to the "Member Database" menu
+	-The user is then asked which of the attributes listed above they wish to change, and then to input the attribute's new value
 
 Sales Records Options
 1. See total profits - How much money was made selling books
