@@ -37,22 +37,22 @@ Main Menu Options
 Manage the Bookstore Options
 1. View book list - Displays every book's title, the price of 1 copy, and how many are in stock
  	-If the bookstore has yet to stock any books, the user is informed of the fact and redirected to the "Manage the bookstore" menu
-3. Buy books from supplier - Buy stock from a supplier
+2. Buy books from supplier - Buy stock from a supplier (Makes a new Book object if it didn't exist before)
  	-If the bookstore has no supplier records, the user is informed of the fact and redirected to the "Manage the bookstore" menu
 	-User is asked for the title of the book, how much for 1 copy charged by the supplier, and how many copies to buy
 	-If the bookstore has never stocked the book before, set the price for 1 copy
 	-If this is the first time a supplier has sold stock of this book to the bookstore, add the book's title to their list of books supplied
 	-Total losses are increased by the amount paid for buying stock
-5. Sell books to customers - 
+3. Sell books to customers - 
  	-If the bookstore has yet to stock any books, the user is informed of the fact and redirected to the "Manage the bookstore" menu
 	-The user is asked which book is being sold, how many copies are being sold, and the name of the customer
 	-If the bookstore does not stock the book, the user is informed of the fact and redirected to the "Manage the bookstore" menu
 	-If the bookstore no has no remaining stock of the book, the user is informed of the fact and redirected to the "Manage the bookstore" menu
 	-If the customer has a Member record, then their books_bought attribute is updated with details of their purchase
 	-Total profits are increased by the amount made by selling stock
-7. Manage book prices - Alloes the user to set a new price for a book
+4. Manage book prices - Alloes the user to set a new price for a book
  	-If the bookstore has yet to stock any books, the user is informed of the fact and redirected to the "Manage the bookstore" menu
-8. Receive a returned book - The bookstore is returned at least 1 copy of a book by a member, as long as the return is within 30 days of purchase
+5. Receive a returned book - The bookstore is returned at least 1 copy of a book by a member, as long as the return is within 30 days of purchase
  	-If the bookstore has yet to stock any books or has no member records, the user is informed of the fact and redirected to the "Manage the bookstore" menu
 	-User is asked the name of the person who wishes to return a book, which book, and how many
 	-If the person is not a member, the user is informed of the fact and redirected to the "Manage the bookstore" menu
@@ -62,26 +62,50 @@ Manage the Bookstore Options
 	-If the return goes through, the member is paid an amount equal to how much they paid for the books during their purchase. The returned copies are then added 		to the bookstore's wares, and the total sales goes down by how much the bookstore refunded the member
 
 Employee DB Options
-1. View employee records - 
-2. Add employee record - 
-3. Remove employee record - 
-4. Modify employee record - 
+1. View employee records - Displays every employee's name, address, job, and salary
+ 	-If the bookstore has no employee records, the user is informed of the fact and redirected to the "Employee Database" menu
+2. Add employee record - Make a new Employee object
+ 	-The user is asked the employee's name, their address, what their position will be, and what will be their salary
+	-If the bookstore already has an employee records of the inputted name, the user is informed of the fact and redirected to the "Employee Database" menu
+3. Remove employee record - Delete an Employee object
+ 	-The user is asked the name of the employee whose record is being deleted
+	-If the bookstore has no employee record of the inputted name, the user is informed of the fact and redirected to the "Employee Database" menu
+4. Modify employee record - Allows the user to change an Employee's attributes
+ 	-
 
 Supplier DB Options
-1. View supplier records - 
-2. View a supplier's list of books supplied - 
-3. Add supplier record - 
-4. Remove supplier record - 
-5. Modify supplier record - 
+1. View supplier records - Displays every supplier's name and address
+ 	-If the bookstore has no supplier records, the user is informed of the fact and redirected to the "Supplier Database" menu
+2. View a supplier's list of books supplied - Outputs a list of book titles, which are the books that the user-selected supplier has given stock to the bookstore
+ 	-The user is asked the supplier's name whom they wish to view
+	-If the bookstore has no supplier records of the inputted name, the user is informed of the fact and redirected to the "Supplier Database" menu
+3. Add supplier record - Make a new Supplier object
+ 	-The user is asked the supplier's name and their address
+	-If the bookstore already has a supplier record of the inputted name, the user is informed of the fact and redirected to the "Supplier Database" menu
+4. Remove supplier record - Delete a Supplier object
+ 	-The user is asked the name of the supplier whose record is being deleted
+	-If the bookstore has no supplier records of the inputted name, the user is informed of the fact and redirected to the "Supplier Database" menu
+5. Modify supplier record - Allows a user to change a Supplier's name and addrees
+ 	-
 
 Member DB Options
-1. View member records - 
-2. View list of books bought by a member - 
-3. View list of books returned by a member - 
-4. Add member record - 
-5. Remove member record - 
-6. Modify member record - 
+1. View member records - Displays every member's name and address
+ 	-If the bookstore has no member records, the user is informed of the fact and redirected to the "Member Database" menu
+2. View list of books bought by a member - Outputs a list of book titles, which are the books that the member has bought from the bookstore
+ 	-The user is asked the member's name whom they wish to view
+	-If the bookstore has no member records of the inputted name, the user is informed of the fact and redirected to the "Member Database" menu
+3. View list of books returned by a member - Outputs a list of book titles, which are the books that the member has returned to the bookstore
+ 	-The user is asked the member's name whom they wish to view
+	-If the bookstore has no member records of the inputted name, the user is informed of the fact and redirected to the "Member Database" menu
+4. Add member record - Make a new Member object
+ 	-The user is asked the member's name and their address
+	-If the bookstore already has a member record of the inputted name, the user is informed of the fact and redirected to the "Member Database" menu
+5. Remove member record - Delete a Member object
+ 	-The user is asked the name of the member whose record is being deleted
+	-If the bookstore has no member records of the inputted name, the user is informed of the fact and redirected to the "Member Database" menu
+6. Modify member record - Allows a user to change a Member's name and address
+ 	-
 
 Sales Records Options
-1. See total profits - 
-2. See total losses - 
+1. See total profits - How much money was made selling books
+2. See total losses - How much money was lost buying stock
