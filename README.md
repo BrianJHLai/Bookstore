@@ -28,18 +28,38 @@ Member Attributes
 4. books_returned - The list of books that the member has returned
 
 Main Menu Options
-1. Manage the bookstore - 
-2. Employee Database - 
-3. Supplier Database - 
-4. Member Database - 
-5. Sales Records - 
+1. Manage the bookstore - Go to the menu for managing the bookstore and interacting with Book objects, as well as Supplier and Member objects to a degree
+2. Employee Database - Go to the menu for interacting with Employee objects
+3. Supplier Database - Go to the menu for interacting with Supplier objects
+4. Member Database - Go to the menu for interacting with Member objects
+5. Sales Records - Go to the menu for seeing total profits and total losses over the course of the current run
 
 Manage the Bookstore Options
-1. View book list - 
-2. Buy books from supplier - 
-3. Sell books to customers - 
-4. Manage book prices - 
-5. Receive a returned book - 
+1. View book list - Displays every book's title, the price of 1 copy, and how many are in stock
+ 	-If the bookstore has yet to stock any books, the user is informed of the fact and redirected to the "Manage the bookstore" menu
+3. Buy books from supplier - Buy stock from a supplier
+ 	-If the bookstore has no supplier records, the user is informed of the fact and redirected to the "Manage the bookstore" menu
+	-User is asked for the title of the book, how much for 1 copy charged by the supplier, and how many copies to buy
+	-If the bookstore has never stocked the book before, set the price for 1 copy
+	-If this is the first time a supplier has sold stock of this book to the bookstore, add the book's title to their list of books supplied
+	-Total losses are increased by the amount paid for buying stock
+5. Sell books to customers - 
+ 	-If the bookstore has yet to stock any books, the user is informed of the fact and redirected to the "Manage the bookstore" menu
+	-The user is asked which book is being sold, how many copies are being sold, and the name of the customer
+	-If the bookstore does not stock the book, the user is informed of the fact and redirected to the "Manage the bookstore" menu
+	-If the bookstore no has no remaining stock of the book, the user is informed of the fact and redirected to the "Manage the bookstore" menu
+	-If the customer has a Member record, then their books_bought attribute is updated with details of their purchase
+	-Total profits are increased by the amount made by selling stock
+7. Manage book prices - Alloes the user to set a new price for a book
+ 	-If the bookstore has yet to stock any books, the user is informed of the fact and redirected to the "Manage the bookstore" menu
+8. Receive a returned book - The bookstore is returned at least 1 copy of a book by a member, as long as the return is within 30 days of purchase
+ 	-If the bookstore has yet to stock any books or has no member records, the user is informed of the fact and redirected to the "Manage the bookstore" menu
+	-User is asked the name of the person who wishes to return a book, which book, and how many
+	-If the person is not a member, the user is informed of the fact and redirected to the "Manage the bookstore" menu
+	-If the book that the member wishes to return was never stocked by the bookstore, the user is informed of the fact and redirected to the "Manage the bookstore" 	menu
+	-If the number of books to be returned exceeds how many were actually bought, then all of the bought books are returned
+	-If the return is attempted 30 days after purchase, the user is informed of the fact and redirected to the "Manage the bookstore" menu
+	-If the return goes through, the member is paid an amount equal to how much they paid for the books during their purchase. The returned copies are then added 		to the bookstore's wares, and the total sales goes down by how much the bookstore refunded the member
 
 Employee DB Options
 1. View employee records - 
